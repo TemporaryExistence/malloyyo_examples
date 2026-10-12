@@ -1,11 +1,13 @@
 ##! experimental.givens
 
-// The regional view of the ecommerce model. It reuses the semantic model in
-// ../ecommerce rather than copying it, and narrows it to the asker's country.
+// The regional view of the ecommerce model. It builds on ecommerce.malloy and
+// gs.malloy in this directory (copies of ../ecommerce's; a dataset is compiled
+// from its own directory alone, so it cannot import across datasets) and
+// narrows it to the asker's country. Keep the copies in step with ../ecommerce.
 //
 // Selective import, on purpose: a bare import would bring the ecommerce
 // model's dashboard filter givens along with it.
-import { all_order_items is order_items } from '../ecommerce/ecommerce.malloy'
+import { all_order_items is order_items } from 'ecommerce.malloy'
 
 #" Every role the signed-in person holds. Malloyyo fills this and a caller
 #" cannot set it. The default matches no country, so an unsupplied value
