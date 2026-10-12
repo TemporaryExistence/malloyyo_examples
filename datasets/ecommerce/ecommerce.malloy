@@ -28,6 +28,11 @@ import "gs.malloy"
 
 -- run: date_shift -> last_created
 
+#" Who is asking: every role the signed-in person holds. Malloyyo fills this
+#" and a caller cannot set it. The default matches no country, so with no
+#" roles supplied, order_items returns no rows.
+given: MALLOYYO_ROLES :: string[] is ['']
+
 #" used internally to keep the sample data looking current; do not query directly
 given: day_offset:: number is days(@2022-11-14 23:55:09 to now)
 
@@ -127,6 +132,13 @@ source: order_items is order_items_table include {
     users with user_id
     inventory_items with inventory_item_id
     user_order_facts with user_id
+
+  // Row-level access. Analysts hold the 'analyst' role and see every order; a
+  // regional manager holds a role named for their country ('usa', 'uk' — the
+  // lowercase of the data's USA / UK) and sees only that country's orders.
+  // Anyone holding neither sees nothing. Applied here, in the source, so it
+  // holds for every dashboard and every query written against order_items.
+  where: 'analyst' in $MALLOYYO_ROLES or lower(users.country) in $MALLOYYO_ROLES
 
   dimension:
     gross_margin is sale_price - inventory_items.cost
