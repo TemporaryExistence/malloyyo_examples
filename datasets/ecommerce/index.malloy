@@ -8,14 +8,12 @@ import {
   order_items,
   inventory_items,        // backs the Brand / Category / Product / Department suggest lists
   brand_suggest, category_suggest, product_suggest, department_suggest,
-  PRODUCT, CATEGORY, BRAND, PERIOD, DEPARTMENT,
-  MALLOYYO_ROLES          // who is asking; filled by Malloyyo, scopes order_items by country
+  PRODUCT, CATEGORY, BRAND, PERIOD, DEPARTMENT
 } from 'ecommerce.malloy'
 
 export {
   order_items,
   inventory_items,        // backs the Brand / Category / Product / Department suggest lists
   brand_suggest, category_suggest, product_suggest, department_suggest,
-  PRODUCT, CATEGORY, BRAND, PERIOD, DEPARTMENT,
-  MALLOYYO_ROLES          // who is asking; filled by Malloyyo, scopes order_items by country
+  PRODUCT, CATEGORY, BRAND, PERIOD, DEPARTMENT
 }
