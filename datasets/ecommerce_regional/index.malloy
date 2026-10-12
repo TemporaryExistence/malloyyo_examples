@@ -1,0 +1,8 @@
+##! experimental.givens
+
+##" Ecommerce orders for regional managers: the same model as Ecommerce, narrowed to the country matching the role you hold (usa, uk).
+## dataset { title="Ecommerce (Regional)" }
+
+import { order_items, MALLOYYO_ROLES } from 'ecommerce_regional.malloy'
+
+export { order_items, MALLOYYO_ROLES }

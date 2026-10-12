@@ -1,0 +1,22 @@
+##! experimental.givens
+
+// The regional view of the ecommerce model. It reuses the semantic model in
+// ../ecommerce rather than copying it, and narrows it to the asker's country.
+//
+// Selective import, on purpose: a bare import would bring the ecommerce
+// model's dashboard filter givens along with it.
+import { all_order_items is order_items } from '../ecommerce/ecommerce.malloy'
+
+#" Every role the signed-in person holds. Malloyyo fills this and a caller
+#" cannot set it. The default matches no country, so an unsupplied value
+#" shows nothing.
+given: MALLOYYO_ROLES :: string[] is ['']
+
+// The ONLY scoping rule, and deliberately nothing else: a role named for a
+// country ('usa', 'uk' — the lowercase of the data's USA / UK) sees that
+// country's orders. There is no role that widens this; people who need every
+// country are granted the unscoped `ecommerce` dataset instead.
+#" Ecommerce orders, narrowed to the countries of the roles you hold.
+source: order_items is all_order_items extend {
+  where: lower(users.country) in $MALLOYYO_ROLES
+}
