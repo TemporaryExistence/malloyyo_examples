@@ -15,11 +15,11 @@ query: customer_insights_dashboard is order_items -> {
     created_at ~ $PERIOD
   # colspan=2
   aggregate:
-    total_sales
+    sales_amount
     user_count
     order_count
     # currency
-    average_order_value is total_sales / order_count
+    average_order_value is sales_amount / order_count
   # colspan=3
   nest:
     # break

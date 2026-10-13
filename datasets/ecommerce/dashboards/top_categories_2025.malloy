@@ -4,8 +4,8 @@ import "../index.malloy"
 query: top_categories_2025 is order_items -> {
   group_by: category is inventory_items.product_category
   aggregate:
-    sales_2025 is total_sales { where: year(created_at) = 2025 }
-    sales_2024 is total_sales { where: year(created_at) = 2024 }
+    sales_2025 is sales_amount { where: year(created_at) = 2025 }
+    sales_2024 is sales_amount { where: year(created_at) = 2024 }
 } -> {
   select: category, sales_2025, sales_2024, growth is sales_2025 / sales_2024 - 1
   order_by: sales_2025 desc

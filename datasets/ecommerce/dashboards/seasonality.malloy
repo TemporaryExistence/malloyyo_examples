@@ -6,7 +6,7 @@ import "../index.malloy"
 # artifact { title="Category Seasonality" }
 #" Category seasonality — each category's calendar-month sales as a share of its OWN annual total, so a small category's rhythm reads as clearly as a giant's. Warm months over-index, cool months under-index. Filter by brand, department, or time period.
 // Two stages to sidestep a DuckDB binder crash (duckdb/duckdb#23383): the same
-// window aggregate `all(total_sales, category)` used BOTH bare AND inside
+// window aggregate `all(sales_amount, category)` used BOTH bare AND inside
 // arithmetic in ONE projection crashes DuckDB's binder. Stage 1 computes the
 // per-category total with the window aggregate ONCE (bare); stage 2 derives the
 // share as plain column arithmetic (month_sales / category_total) — no window
@@ -25,8 +25,8 @@ query: seasonality is order_items -> {
       pick 'Jul' when 7 pick 'Aug' when 8 pick 'Sep' when 9
       pick 'Oct' when 10 pick 'Nov' when 11 else 'Dec'
   aggregate:
-    month_sales is total_sales
-    category_total is all(total_sales, category)
+    month_sales is sales_amount
+    category_total is all(sales_amount, category)
 } -> {
   select:
     category
