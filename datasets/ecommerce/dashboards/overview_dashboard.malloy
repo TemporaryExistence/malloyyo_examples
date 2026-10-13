@@ -18,7 +18,7 @@ source: overview_data is order_items extend {
   # colspan=2
   view: kpis is {
     aggregate:
-      sales_amount
+      total_sales
       total_gross_margin
       order_count
       order_item_count
